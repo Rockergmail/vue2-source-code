@@ -41,6 +41,7 @@ export default class Watcher {
   }
   //   把dep放到deps里面 同时保证同一个dep只被保存到watcher一次  同样的  同一个watcher也只会保存在dep一次
   addDep(dep) {
+    // TODO: 需要去dep去看看逻辑
     let id = dep.id;
     if (!this.depsId.has(id)) {
       this.depsId.add(id);
@@ -51,6 +52,7 @@ export default class Watcher {
   }
   //   这里简单的就执行以下get方法  之后涉及到计算属性就不一样了
   update() {
+    // TODO: 为什么computed的时候，不需要调度？
     // 计算属性依赖的值发生变化 只需要把dirty置为true  下次访问到了重新计算
     if (this.lazy) {
       this.dirty = true;
@@ -65,6 +67,7 @@ export default class Watcher {
     this.dirty = false;
   }
   depend(){
+    // TODO: deps的depend有什么用？
     // 计算属性的watcher存储了依赖项的dep 
     let i=this.deps.length
     while(i--){
@@ -72,6 +75,7 @@ export default class Watcher {
     }
   }
   run() {
+    // TODO: 这里的cb，为什么不是exprOrFn
     const newVal = this.get(); //新值
     const oldVal = this.value; //老值
     this.value = newVal; //跟着之后  老值就成为了现在的值

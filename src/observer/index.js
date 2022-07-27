@@ -1,3 +1,10 @@
+/*
+ * @description: 
+ * @author: xiangrong.liu
+ * @Date: 2022-07-26 16:35:58
+ * @LastEditors: xiangrong.liu
+ * @LastEditTime: 2022-07-27 16:31:06
+ */
 import { arrayMethods } from "./array";
 import Dep from "./dep";
 
@@ -5,6 +12,7 @@ class Observer {
   // 观测值
   constructor(value) {
     this.value = value;
+    // TODO: ？？？ FOR what
     this.dep = new Dep(); //当数组使用7种重写方法时  是无法进行依赖收集和派发更新的  此属性主要辅助数组更新
     Object.defineProperty(value, "__ob__", {
       //  值指代的就是Observer的实例
@@ -42,6 +50,7 @@ class Observer {
 }
 // Object.defineProperty数据劫持核心 兼容性在ie9以及以上
 function defineReactive(data, key, value) {
+  // TODO: 那如果是Map、Set、Array呢？
   let childOb = observe(value); // 递归关键 --如果value还是一个对象会继续走一遍odefineReactive 层层遍历一直到value不是对象才停止
   //   思考？如果Vue数据嵌套层级过深 >>性能会受影响
 
